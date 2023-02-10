@@ -1,21 +1,17 @@
 package com.nelkinda.training
 
+import com.nelkinda.training.model.Expense
+import com.nelkinda.training.model.ExpenseType
 import java.util.Date
 import kotlin.collections.MutableMap as MutableMap
 
-enum class ExpenseType {
-    DINNER, BREAKFAST, CAR_RENTAL
-}
 
-class Expense(val type: ExpenseType, val amount: Int) {
-
-}
 
 class ExpenseReport {
 
     private var total = 0
     private var mealExpenses = 0
-    fun printReport(expenses: List<Expense>,date : Date=Date()) {
+    fun printReport(expenses: List<Expense>, date : Date=Date()) {
 
         println("Expenses ${date}")
 

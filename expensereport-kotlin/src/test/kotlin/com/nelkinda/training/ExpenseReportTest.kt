@@ -1,5 +1,7 @@
 package com.nelkinda.training
 
+import com.nelkinda.training.model.Expense
+import com.nelkinda.training.model.ExpenseType
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
