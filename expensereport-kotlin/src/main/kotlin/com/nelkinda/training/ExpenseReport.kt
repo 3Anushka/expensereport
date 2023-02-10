@@ -1,6 +1,7 @@
 package com.nelkinda.training
 
 import java.util.Date
+import kotlin.collections.MutableMap as MutableMap
 
 enum class ExpenseType {
     DINNER, BREAKFAST, CAR_RENTAL
@@ -14,16 +15,17 @@ class ExpenseReport {
 
     private var total = 0
     private var mealExpenses = 0
-    fun printReport(expenses: List<Expense>) {
+    fun printReport(expenses: List<Expense>,date : Date=Date()) {
 
-        println("Expenses ${Date()}")
+        println("Expenses ${date}")
 
         for (expense in expenses) {
             calculateMealExpense(expense)
 
             val expenseName = getExpenseName(expense)
 
-            val mealOverExpensesMarker = if (expense.type == ExpenseType.DINNER && expense.amount > 5000 || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000) "X" else " "
+            val mealOverExpensesMarker = getMealOverExpensesMarker(expenseName,expense.amount)
+
 
             println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker)
 
@@ -34,6 +36,21 @@ class ExpenseReport {
         println("Total expenses: $total")
     }
 
+    private fun getMealOverExpensesMarker(expenseName:String,amount: Int): String {
+
+        val expenseLimit : MutableMap<String,Int> = mutableMapOf()
+
+        expenseLimit["Dinner"] = 5000
+        expenseLimit["Breakfast"] = 1000
+
+        if(expenseLimit[expenseName]==null)
+            return " "
+
+        if (amount > expenseLimit[expenseName]!!)
+            return "X"
+
+        return " "
+    }
 
     private fun getExpenseName(expense: Expense) = when (expense.type) {
         ExpenseType.DINNER -> "Dinner"

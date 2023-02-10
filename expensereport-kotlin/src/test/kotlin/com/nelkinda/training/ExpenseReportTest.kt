@@ -24,14 +24,17 @@ class ExpenseReportTest {
     @Test
     fun `it should print report with zero values if empty list is passed`() {
 
-        expenseReport.printReport(emptyList())
+        val date=Date()
+        expenseReport.printReport(emptyList(),date)
 
-        assertEquals("Expenses ${Date()}\nMeal expenses: 0\nTotal expenses: 0\n", outputStreamCaptor.toString())
+
+        assertEquals("Expenses ${date}\nMeal expenses: 0\nTotal expenses: 0\n", outputStreamCaptor.toString())
     }
 
     @Test
     fun `it should print report when one dinner expense is passed`() {
 
+        val date=Date()
         val expense1 = Expense(ExpenseType.DINNER, 10)
         val allExpenses = arrayListOf<Expense>()
         allExpenses.add(expense1)
@@ -39,7 +42,7 @@ class ExpenseReportTest {
 
         expenseReport.printReport(allExpenses)
 
-        val expectedOutput = "Expenses ${Date()}\nDinner\t10\t \nMeal expenses: 10\nTotal expenses: 10\n"
+        val expectedOutput = "Expenses ${date}\nDinner\t10\t \nMeal expenses: 10\nTotal expenses: 10\n"
         val actualOutput = outputStreamCaptor.toString()
 
         checkAssertion(expectedOutput, actualOutput)
@@ -49,6 +52,7 @@ class ExpenseReportTest {
     @Test
     fun `it should print report when all expenses are passed and check if total and meal expenses are different`() {
 
+        val date=Date()
         val expense1 = Expense(ExpenseType.DINNER, 10)
         val expense2 = Expense(ExpenseType.BREAKFAST, 10)
         val expense3 = Expense(ExpenseType.CAR_RENTAL, 10)
@@ -60,7 +64,7 @@ class ExpenseReportTest {
 
         expenseReport.printReport(allExpenses)
 
-        val expectedOutput = "Expenses ${Date()}\nDinner\t10\t \n" +
+        val expectedOutput = "Expenses ${date}\nDinner\t10\t \n" +
                 "Breakfast\t10\t \n" +
                 "Car Rental\t10\t \nMeal expenses: 20\nTotal expenses: 30\n"
 
@@ -72,6 +76,7 @@ class ExpenseReportTest {
     @Test
     fun `it should print X infront of dinner report if amount exceed 5000`() {
 
+        val date=Date()
         val expense1 = Expense(ExpenseType.DINNER, 5001)
         val expense2 = Expense(ExpenseType.BREAKFAST, 10)
         val allExpenses = arrayListOf<Expense>()
@@ -81,7 +86,7 @@ class ExpenseReportTest {
 
         expenseReport.printReport(allExpenses)
 
-        val expectedOutput = "Expenses ${Date()}\nDinner\t5001\tX\n" +
+        val expectedOutput = "Expenses ${date}\nDinner\t5001\tX\n" +
                 "Breakfast\t10\t \nMeal expenses: 5011\nTotal expenses: 5011\n"
         val actualOutput = outputStreamCaptor.toString()
 
@@ -93,6 +98,7 @@ class ExpenseReportTest {
     @Test
     fun `it should print X infront of breakfast report if amount exceed 5000`() {
 
+        val date=Date()
         val expense1 = Expense(ExpenseType.DINNER, 500)
         val expense2 = Expense(ExpenseType.BREAKFAST, 1001)
         val allExpenses = arrayListOf<Expense>()
@@ -102,7 +108,7 @@ class ExpenseReportTest {
 
         expenseReport.printReport(allExpenses)
 
-        val expectedOutput = "Expenses ${Date()}\nDinner\t500\t \n" +
+        val expectedOutput = "Expenses ${date}\nDinner\t500\t \n" +
                 "Breakfast\t1001\tX\nMeal expenses: 1501\nTotal expenses: 1501\n"
         val actualOutput = outputStreamCaptor.toString()
 
