@@ -63,11 +63,30 @@ class ExpenseReportTest {
         val expectedOutput = "Expenses ${Date()}\nDinner\t10\t \n" +
                 "Breakfast\t10\t \n" +
                 "Car Rental\t10\t \nMeal expenses: 20\nTotal expenses: 30\n"
+
         val actualOutput = outputStreamCaptor.toString()
 
         checkAssertion(expectedOutput, actualOutput)
     }
 
+    @Test
+    fun `it should print X infront of dinner report if amount exceed 5000`() {
+
+        val expense1 = Expense(ExpenseType.DINNER, 5001)
+        val expense2 = Expense(ExpenseType.BREAKFAST, 10)
+        val allExpenses = arrayListOf<Expense>()
+        allExpenses.add(expense1)
+        allExpenses.add(expense2)
+
+
+        expenseReport.printReport(allExpenses)
+
+        val expectedOutput = "Expenses ${Date()}\nDinner\t5001\tX\n" +
+                "Breakfast\t10\t \nMeal expenses: 5011\nTotal expenses: 5011\n"
+        val actualOutput = outputStreamCaptor.toString()
+
+        checkAssertion(expectedOutput, actualOutput)
+    }
 
 
     private fun checkAssertion(expectedOutput: String, actualOutput: String) {
