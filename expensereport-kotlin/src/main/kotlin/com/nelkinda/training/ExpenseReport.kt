@@ -38,6 +38,7 @@ class ExpenseReport {
 
         expenseLimit["Dinner"] = 5000
         expenseLimit["Breakfast"] = 1000
+        expenseLimit["Lunch"]=2000
 
         if(expenseLimit[expenseName]==null)
             return " "
@@ -52,10 +53,11 @@ class ExpenseReport {
         ExpenseType.DINNER -> "Dinner"
         ExpenseType.BREAKFAST -> "Breakfast"
         ExpenseType.CAR_RENTAL -> "Car Rental"
+        ExpenseType.LUNCH -> "Lunch"
     }
 
     private fun calculateMealExpense(expense: Expense) {
-        if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
+        if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST || expense.type == ExpenseType.LUNCH) {
             mealExpenses += expense.amount
         }
     }

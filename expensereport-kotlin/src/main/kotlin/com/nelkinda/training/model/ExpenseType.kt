@@ -1,5 +1,5 @@
 package com.nelkinda.training.model
 
 enum class ExpenseType {
-    DINNER, BREAKFAST, CAR_RENTAL
+    DINNER, BREAKFAST, CAR_RENTAL , LUNCH
 }
