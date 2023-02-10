@@ -21,11 +21,7 @@ class ExpenseReport {
         for (expense in expenses) {
             calculateMealExpense(expense)
 
-            val expenseName = when(expense.type) {
-                ExpenseType.DINNER ->  "Dinner"
-                ExpenseType.BREAKFAST -> "Breakfast"
-                ExpenseType.CAR_RENTAL -> "Car Rental"
-            }
+            val expenseName = getExpenseName(expense)
 
             val mealOverExpensesMarker = if (expense.type == ExpenseType.DINNER && expense.amount > 5000 || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000) "X" else " "
 
@@ -36,6 +32,13 @@ class ExpenseReport {
 
         println("Meal expenses: $mealExpenses")
         println("Total expenses: $total")
+    }
+
+
+    private fun getExpenseName(expense: Expense) = when (expense.type) {
+        ExpenseType.DINNER -> "Dinner"
+        ExpenseType.BREAKFAST -> "Breakfast"
+        ExpenseType.CAR_RENTAL -> "Car Rental"
     }
 
     private fun calculateMealExpense(expense: Expense) {
