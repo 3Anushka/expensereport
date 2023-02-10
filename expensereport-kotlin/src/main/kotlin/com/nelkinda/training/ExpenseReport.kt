@@ -6,9 +6,8 @@ enum class ExpenseType {
     DINNER, BREAKFAST, CAR_RENTAL
 }
 
-class Expense {
-    lateinit var type: ExpenseType
-    var amount: Int = 0
+class Expense(val type: ExpenseType, val amount: Int) {
+
 }
 
 class ExpenseReport {
