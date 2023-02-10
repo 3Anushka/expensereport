@@ -45,6 +45,31 @@ class ExpenseReportTest {
         checkAssertion(expectedOutput, actualOutput)
     }
 
+
+    @Test
+    fun `it should print report when all expenses are passed and check if total and meal expenses are different`() {
+
+        val expense1 = Expense(ExpenseType.DINNER, 10)
+        val expense2 = Expense(ExpenseType.BREAKFAST, 10)
+        val expense3 = Expense(ExpenseType.CAR_RENTAL, 10)
+        val allExpenses = arrayListOf<Expense>()
+        allExpenses.add(expense1)
+        allExpenses.add(expense2)
+        allExpenses.add(expense3)
+
+
+        expenseReport.printReport(allExpenses)
+
+        val expectedOutput = "Expenses ${Date()}\nDinner\t10\t \n" +
+                "Breakfast\t10\t \n" +
+                "Car Rental\t10\t \nMeal expenses: 20\nTotal expenses: 30\n"
+        val actualOutput = outputStreamCaptor.toString()
+
+        checkAssertion(expectedOutput, actualOutput)
+    }
+
+
+
     private fun checkAssertion(expectedOutput: String, actualOutput: String) {
         assertEquals(expectedOutput, actualOutput)
     }
